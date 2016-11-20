@@ -1,0 +1,48 @@
+<!-- new syntax for ng-if -->
+<section *ngIf="level">
+  <section class='level-detail'>
+    <div class='card'>
+      <h2>Level Name: {{level.name}}</h2>
+      <h3>Reward Earned:</h3>
+      <p>
+        {{level.rewardEarned}}
+      </p>
+      <h3>Number of Cards required: {{level.numberOfCardsRequired}}</h3>
+      <h3>Level Image: </h3>
+      <img [src]="displayLogoUrl" class='logo' />
+    </div>
+  </section>
+  <section>
+  <h2>Edit Level Properties</h2>
+    <form (ngSubmit)="savePersonDetails()" #levelForm="ngForm">
+        <div>
+            <label for="name">Name: </label>
+            <input type="text" name="name" required [(ngModel)]="level.name" #name="ngModel">
+            <div [hidden]="name.valid || name.pristine" class="error">
+                Name is required my good sir/lady!
+            </div>
+      </div>
+      <div>
+        <label for="rewardEarned">What reward does this level give: </label>
+        <input type="text" name="rewardEarned" [(ngModel)]="level.rewardEarned">
+      </div>
+      <div>
+        <label for="numberOfCardsRequired">Update number of required for this level: </label>
+        <input type="number" name="numberOfCardsRequired" [(ngModel)]="level.numberOfCardsRequired">
+      </div>
+      <div>
+        <label for="logo">Level Logo: </label>
+        <input type="text" name="logo" [(ngModel)]="level.logo">
+      </div>
+      <!--<div>
+        <label for="profession">Profession:</label>
+        <select name="profession" [(ngModel)]="person.profession">
+          <option *ngFor="let profession of professions" [value]="profession">{{profession}}</option>
+        </select>
+      </div>-->
+      <button type="submit" [disabled]="!levelForm.form.valid">Save</button>
+    </form>
+  </section>
+
+  <button (click)="gotoLevelsList()">Back to Levels</button>
+<section>
