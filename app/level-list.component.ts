@@ -1,4 +1,5 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
 import { Level } from './level';
 import { LevelService } from './level.service';
 

@@ -10,11 +10,17 @@
       <h3>Number of Cards required: {{level.numberOfCardsRequired}}</h3>
       <h3>Level Image: </h3>
       <img [src]="displayLogoUrl" class='logo' />
+      <h3>Loyalty Programs:</h3>
+      <ul>
+        <li *ngFor="let program of loyaltyPrograms">
+          {{program.name}}
+        </li>
+      </ul>
     </div>
   </section>
   <section>
   <h2>Edit Level Properties</h2>
-    <form (ngSubmit)="savePersonDetails()" #levelForm="ngForm">
+    <form (ngSubmit)="saveLevelDetails()" #levelForm="ngForm">
         <div>
             <label for="name">Name: </label>
             <input type="text" name="name" required [(ngModel)]="level.name" #name="ngModel">
@@ -34,6 +40,17 @@
         <label for="logo">Level Logo: </label>
         <input type="text" name="logo" [(ngModel)]="level.logo">
       </div>
+      <h3>Update Loyalty Programs that can be used to earn this level</h3>
+      <div *ngFor="let program of programs">
+          <label>
+              <input type="checkbox"
+                     name="programs"
+                     value="{{program.id}}"
+              />
+              {{program.name}}
+          </label>
+      </div>
+      <p></p>
       <!--<div>
         <label for="profession">Profession:</label>
         <select name="profession" [(ngModel)]="person.profession">

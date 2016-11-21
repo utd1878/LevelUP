@@ -4,4 +4,5 @@ export interface Level{
     logo: string;
     rewardEarned: string;
     numberOfCardsRequired: number;
+    loyaltyPrograms: number[];
 }

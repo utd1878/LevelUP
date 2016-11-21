@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LevelService } from './level.service';
+import { LoyaltyProgramService } from './loyalty-program.service';
 
 @Component({
   selector: 'my-app',
@@ -7,7 +8,7 @@ import { LevelService } from './level.service';
   <h1> {{title}} </h1>
   <router-outlet>
   `,
-  providers: [LevelService]
+  providers: [LevelService, LoyaltyProgramService]
 })
 export class AppComponent {
   title:string = 'Gamification';
