@@ -46,6 +46,7 @@
               <input type="checkbox"
                      name="programs"
                      value="{{program.id}}"
+                     [checked]="isChecked(program.id)"
               />
               {{program.name}}
           </label>

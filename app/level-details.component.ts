@@ -35,6 +35,10 @@ export class LevelDetailsComponent implements OnInit, OnDestroy {
         });
     }
 
+    isChecked(id: number):boolean{
+      return this.level.loyaltyPrograms.indexOf(id) > -1;
+    }
+
     ngOnDestroy(){
         this.sub.unsubscribe();
     }
