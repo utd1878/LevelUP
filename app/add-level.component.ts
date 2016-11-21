@@ -1,25 +1,16 @@
-<!-- new syntax for ng-if -->
-<section *ngIf="level">
-  <section class='level-detail'>
-    <div class='card'>
-      <h2>Level Name: {{level.name}}</h2>
-      <h3>Reward Earned:</h3>
-      <p>
-        {{level.rewardEarned}}
-      </p>
-      <h3>Number of Cards required: {{level.numberOfCardsRequired}}</h3>
-      <h3>Level Image: </h3>
-      <img [src]="displayLogoUrl" class='logo' />
-      <h3>Loyalty Programs:</h3>
-      <ul>
-        <li *ngFor="let program of loyaltyPrograms">
-          {{program.name}}
-        </li>
-      </ul>
-    </div>
-  </section>
-  <section>
-  <h2>Edit Level Properties</h2>
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { Level } from './level';
+import { LevelService } from './level.service';
+
+import { LoyaltyProgram } from './loyalty-program';
+import { LoyaltyProgramService } from './loyalty-program.service'
+
+@Component({
+  selector: 'add-level',
+  template: `
+  <h2>Add New Level</h2>
     <form (ngSubmit)="saveLevelDetails()" #levelForm="ngForm">
         <div>
             <label for="name">Name: </label>
@@ -33,7 +24,7 @@
         <input type="text" name="rewardEarned" [(ngModel)]="level.rewardEarned">
       </div>
       <div>
-        <label for="numberOfCardsRequired">Update number of required cards for this level: </label>
+        <label for="numberOfCardsRequired">Required Cards for this level: </label>
         <input type="number" name="numberOfCardsRequired" [(ngModel)]="level.numberOfCardsRequired">
       </div>
       <div>
@@ -46,16 +37,38 @@
               <input type="checkbox"
                      name="programs"
                      value="{{program.id}}"
-                     [checked]="isChecked(program.id)"
               />
               {{program.name}}
           </label>
       </div>
       <p></p>
-
       <button type="submit" [disabled]="!levelForm.form.valid">Save</button>
-    </form>
-  </section>
+  `
+})
+export class AddLevelComponent implements OnInit{
+  level: Level;
+  programs: LoyaltyProgram[] = [];
+  errorMessage: string = '';
+  isLoading: boolean = true;
 
-  <button (click)="gotoLevelsList()">Back to Levels</button>
-<section>
+  constructor(private levelService : LevelService,
+              private loyaltyService: LoyaltyProgramService,
+                private router: Router){ }
+
+  ngOnInit(){ 
+    this.level = {
+      id: 0,
+      name: '',
+      logo: '',
+      rewardEarned: '',
+      numberOfCardsRequired: 0,
+      loyaltyPrograms: []
+    }
+    this.programs = this.loyaltyService.getAll();
+  }
+
+  saveLevelDetails(){
+      let link = ['/addlevel'];
+      this.router.navigate(link);
+  }
+}
