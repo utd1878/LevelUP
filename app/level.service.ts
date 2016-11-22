@@ -28,7 +28,12 @@ export class LevelService{
   save(level: Level){
      let originalLevel = LEVELS.find(l => l.id === level.id);
     if (originalLevel) Object.assign(originalLevel, level);
-   
+  }
+
+  add(level: Level){
+    var nextId = Math.max.apply(Math,LEVELS.map(function(o){return o.id;})) + 1;
+    level.id = nextId;
+    LEVELS.push(level);
   }
 
   getLoyaltyPrograms(id: number): LoyaltyProgram[]{

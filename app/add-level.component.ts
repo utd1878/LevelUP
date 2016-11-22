@@ -35,8 +35,9 @@ import { LoyaltyProgramService } from './loyalty-program.service'
       <div *ngFor="let program of programs">
           <label>
               <input type="checkbox"
-                     name="programs"
+                     name="loyaltyPrograms"
                      value="{{program.id}}"
+                     (change)="updateLevelProgram(program.id, $event)"
               />
               {{program.name}}
           </label>
@@ -67,8 +68,19 @@ export class AddLevelComponent implements OnInit{
     this.programs = this.loyaltyService.getAll();
   }
 
+  updateLevelProgram(id: number, event: any){
+      var inLevelIndex = this.level.loyaltyPrograms.indexOf(id);
+      if(event.target.checked && inLevelIndex < 0){
+        this.level.loyaltyPrograms.push(id);
+      } else if (!event.target.checked && inLevelIndex >= 0){
+        this.level.loyaltyPrograms.splice(inLevelIndex, 1);
+      }
+  }
+
   saveLevelDetails(){
-      let link = ['/addlevel'];
+      this.levelService.add(this.level);
+
+      let link = ['/levels', this.level.id];
       this.router.navigate(link);
   }
 }

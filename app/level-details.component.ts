@@ -53,5 +53,15 @@ export class LevelDetailsComponent implements OnInit, OnDestroy {
       alert('Saved');
     }
 
+    updateLevelProgram(id: number, event: any){
+      var inLevelIndex = this.level.loyaltyPrograms.indexOf(id);
+      if(event.target.checked && inLevelIndex < 0){
+        this.level.loyaltyPrograms.push(id);
+        this.loyaltyPrograms.push(this.loyaltyService.get(id));
+      } else if (!event.target.checked && inLevelIndex >= 0){
+        this.level.loyaltyPrograms.splice(inLevelIndex, 1);
+        this.loyaltyPrograms.splice(this.loyaltyPrograms.findIndex(function(i){return i.id == id}), 1);
+      }
+    }
 
 }
