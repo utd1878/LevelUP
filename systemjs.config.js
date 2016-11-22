@@ -26,6 +26,7 @@
       // other libraries
       'rxjs':                       'npm:rxjs',
       'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
+      'ng2-cache':  'npm:ng2-cache'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -33,6 +34,7 @@
         main: './main.js',
         defaultExtension: 'js'
       },
+      'ng2-cache': {main: './ng2-cache.js', 'defaultExtension': 'js'},
       rxjs: {
         defaultExtension: 'js'
       },
