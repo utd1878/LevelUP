@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { LevelService } from './level.service';
 import { LoyaltyProgramService } from './loyalty-program.service';
-import {CacheService, CacheStoragesEnum} from 'ng2-cache/ng2-cache';
 
 @Component({
   selector: 'my-app',
@@ -9,7 +8,10 @@ import {CacheService, CacheStoragesEnum} from 'ng2-cache/ng2-cache';
   <h1> {{title}} </h1>
   <router-outlet>
   `,
-  providers: [LevelService, LoyaltyProgramService, CacheService]
+  providers: [
+  		LevelService, 
+  		LoyaltyProgramService
+        ]
 })
 export class AppComponent {
   title:string = 'Gamification';
